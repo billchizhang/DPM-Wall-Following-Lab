@@ -14,7 +14,7 @@ public class PController implements UltrasonicController {
 	private final int SCALING_FACTOR = 10;
 	private final int ANGLE = 90;
 	private int error = 0;
-	private boolean dir = false;
+	private boolean backward = false;
 	public PController(int bandCenter, int bandwith) {
 		//Default Constructor
 		this.bandCenter = bandCenter;
@@ -35,7 +35,8 @@ public class PController implements UltrasonicController {
 			rotateSensor();
 		}
 		this.distance = distance;
-		this.error = (bandCenter - this.distance);				//difference between ideal distance and real distance
+		//difference between ideal distance and real distance
+		this.error = (bandCenter - this.distance);
 		//if FAR away:
 		if (error < -bandwith){
 			filterControl++;
@@ -54,40 +55,46 @@ public class PController implements UltrasonicController {
 			filterControl = 0;
 			straight();
 		}
-		//it wasn't working without telling the motor to go forward everytime
 	}
+	/*
+	 * Rotates the Sensor
+	 * 
+	 * Rotates to 0 if at 90 deg (backward)
+	 * Rotates to 90 if at 0 deg (forwards) 
+	 */
 	private void rotateSensor() {
-		// TODO Auto-generated method stub
 		usMotor.resetTachoCount();
-		if(dir){
+		if(backward){
 			usMotor.rotateTo(-ANGLE, true);
 		}
 		else usMotor.rotateTo(ANGLE, true);
-		dir = !dir;
+		backward = !backward;
 	}
-
+	/*Increases the speed of the rightMotor and reduces speed of the Left Motor
+	 * 
+	 * 
+	 */
 	public void turnLeft(int error){
-/*		rightSpeed = Math.max(MOTOR_STRAIGHT + error / SCALING_FACTOR, MIN_SPEED);
-		leftSpeed = MOTOR_STRAIGHT;
-*/	
 		leftMotor.setSpeed(Math.max((MOTOR_STRAIGHT - SCALING_FACTOR * error) , MIN_SPEED));
 		rightMotor.setSpeed(Math.min((MOTOR_STRAIGHT + SCALING_FACTOR * error), MAX_SPEED));
 
 		leftMotor.forward();
 		rightMotor.forward();
 	}
-	
-	public void turnRight(int error){
-/*		rightSpeed = Math.min(MOTOR_STRAIGHT - error * SCALING_FACTOR, MAX_SPEED);
-		leftSpeed = Math.max(MOTOR_STRAIGHT + error * SCALING_FACTOR,MIN_SPEED);
-*/	
+	/*Increases the speed of the leftMotor and reduces the speed of the rightMotor
+	 * 
+	 * 
+	 */
+	public void turnRight(int error){	
 		leftMotor.setSpeed(MOTOR_STRAIGHT + error / SCALING_FACTOR);
 		rightMotor.setSpeed(MOTOR_STRAIGHT - error / SCALING_FACTOR);
 		
 		leftMotor.forward();
 		rightMotor.backward();
 	}
-	
+	/*
+	 * sets the robot to go straight
+	 */
 	public void straight(){
 	
 		leftMotor.setSpeed(MOTOR_STRAIGHT);		
