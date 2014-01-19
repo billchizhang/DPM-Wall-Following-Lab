@@ -81,8 +81,8 @@ public class PController implements UltrasonicController {
 /*		rightSpeed = Math.min(MOTOR_STRAIGHT - error * SCALING_FACTOR, MAX_SPEED);
 		leftSpeed = Math.max(MOTOR_STRAIGHT + error * SCALING_FACTOR,MIN_SPEED);
 */	
-		leftMotor.setSpeed(MOTOR_STRAIGHT);
-		rightMotor.setSpeed(MOTOR_STRAIGHT);
+		leftMotor.setSpeed(MOTOR_STRAIGHT + error / SCALING_FACTOR);
+		rightMotor.setSpeed(MOTOR_STRAIGHT - error / SCALING_FACTOR);
 		
 		leftMotor.forward();
 		rightMotor.backward();
