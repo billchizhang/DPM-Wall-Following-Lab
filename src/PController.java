@@ -9,10 +9,8 @@ public class PController implements UltrasonicController {
 	private int filterControl;
 	
 	//my constants and variables
-	private int leftSpeed = 200;
-	private int rightSpeed = 200;
 	private final int MIN_SPEED = 50;
-	private final int MAX_SPEED = 400;
+	private final int MAX_SPEED = 350;
 	private final int SCALING_FACTOR = 10;
 	private final int ANGLE = 90;
 	private int error = 0;
@@ -57,11 +55,6 @@ public class PController implements UltrasonicController {
 			straight();
 		}
 		//it wasn't working without telling the motor to go forward everytime
-		leftMotor.forward();
-		rightMotor.forward();
-
-		leftMotor.setSpeed(this.leftSpeed);		
-		rightMotor.setSpeed(this.rightSpeed);
 	}
 	private void rotateSensor() {
 		// TODO Auto-generated method stub
@@ -77,8 +70,8 @@ public class PController implements UltrasonicController {
 /*		rightSpeed = Math.max(MOTOR_STRAIGHT + error / SCALING_FACTOR, MIN_SPEED);
 		leftSpeed = MOTOR_STRAIGHT;
 */	
-		leftMotor.setSpeed(100);
-		rightMotor.setSpeed(300);
+		leftMotor.setSpeed(Math.max((MOTOR_STRAIGHT - SCALING_FACTOR * error) , MIN_SPEED));
+		rightMotor.setSpeed(Math.min((MOTOR_STRAIGHT + SCALING_FACTOR * error), MAX_SPEED));
 
 		leftMotor.forward();
 		rightMotor.forward();
@@ -88,7 +81,7 @@ public class PController implements UltrasonicController {
 /*		rightSpeed = Math.min(MOTOR_STRAIGHT - error * SCALING_FACTOR, MAX_SPEED);
 		leftSpeed = Math.max(MOTOR_STRAIGHT + error * SCALING_FACTOR,MIN_SPEED);
 */	
-		leftMotor.setSpeed(MOTOR_STRAIGHT);				//starts turning a lot
+		leftMotor.setSpeed(MOTOR_STRAIGHT);
 		rightMotor.setSpeed(MOTOR_STRAIGHT);
 		
 		leftMotor.forward();
@@ -96,10 +89,8 @@ public class PController implements UltrasonicController {
 	}
 	
 	public void straight(){
-/*		this.rightSpeed = MOTOR_STRAIGHT;
-		this.leftSpeed = MOTOR_STRAIGHT;
-*/		
-		leftMotor.setSpeed(MOTOR_STRAIGHT);				//sets to full speed			
+	
+		leftMotor.setSpeed(MOTOR_STRAIGHT);		
 		rightMotor.setSpeed(MOTOR_STRAIGHT); 
 		
 		leftMotor.forward();
