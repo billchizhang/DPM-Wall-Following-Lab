@@ -34,11 +34,11 @@ public class BangBangController implements UltrasonicController{
 		leftMotor.setSpeed(motorStraight);
 		rightMotor.setSpeed(motorStraight);
 		/*sets speed of US Motor*/
-		usMotor.setSpeed(US_SPEED);
+		//usMotor.setSpeed(US_SPEED);
 		leftMotor.forward();
 		rightMotor.forward();
 		/*starts rotating the sensor*/
-		rotateSensor();
+		//rotateSensor();
 		currentLeftSpeed = 0;
 	}
 	
@@ -46,7 +46,7 @@ public class BangBangController implements UltrasonicController{
 	public void processUSData(int distance) {
 		
 		if(Math.abs(this.usMotor.getTachoCount()) >= ANGLE){
-			rotateSensor();
+			//rotateSensor();
 		}
 		
 		this.distance = distance;

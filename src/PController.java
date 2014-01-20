@@ -30,9 +30,9 @@ public class PController implements UltrasonicController {
 		rightMotor.setSpeed(MOTOR_STRAIGHT);
 		leftMotor.forward();
 		rightMotor.forward();
-		usMotor.forward();
+		//usMotor.forward();
 		/*starts rotating the sensor*/
-		rotateSensor();
+		//rotateSensor();
 		filterControl = 0;
 	}
 	
@@ -40,7 +40,7 @@ public class PController implements UltrasonicController {
 	public void processUSData(int distance) {
 		//rotates the sensor back if has passed angle
 		if(Math.abs(this.usMotor.getTachoCount()) >= ANGLE){
-			rotateSensor();
+			//rotateSensor();
 		}
 		this.distance = distance;
 		//difference between ideal distance and real distance
