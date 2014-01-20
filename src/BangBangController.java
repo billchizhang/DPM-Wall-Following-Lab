@@ -15,7 +15,7 @@ public class BangBangController implements UltrasonicController{
 	/*counts gaps*/
 	private int filterControl = 0;
 	/*if too many gaps, starts turning left*/
-	private int FILTER_OUT = 20;
+	private int FILTER_OUT = 35;
 	/*motor speed constants*/
 	private int LEFT_SPEED = 100;
 	private int RIGHT_SPEED = 300;
