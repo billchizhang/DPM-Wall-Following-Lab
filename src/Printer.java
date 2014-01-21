@@ -2,6 +2,17 @@ import lejos.nxt.Button;
 import lejos.nxt.LCD;
 import lejos.nxt.Motor;
 
+/*
+ * Group 21 - ECSE 211
+ * Satyajit Kanetkar 	-- 260504913
+ * Sean Wolfe			-- 260584644
+ * 
+ * @requirement: Sensor must be positioned at a 45 degree angle
+ * @requirement: Robot must be on the right of the wall
+ * 
+ * Prints speed of motors
+ */
+
 public class Printer extends Thread {
 	
 	private UltrasonicController cont;
@@ -21,8 +32,11 @@ public class Printer extends Thread {
 			else if (this.option == Button.ID_RIGHT)
 				LCD.drawString("P type", 0, 1);
 			LCD.drawString("US Distance: " + cont.readUSDistance(), 0, 2 );
+			
+			//prints diriving motor speed 
 			LCD.drawInt(Motor.B.getSpeed(), 0, 3);
 			LCD.drawInt(Motor.C.getSpeed(), 4, 3);
+			
 			LCD.drawInt(Motor.A.getTachoCount(), 0, 4);
 			try {
 				Thread.sleep(200);

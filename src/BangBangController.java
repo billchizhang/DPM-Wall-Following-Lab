@@ -1,5 +1,17 @@
 import lejos.nxt.*;
-
+/*
+ * Group 21 - ECSE 211
+ * Satyajit Kanetkar 	-- 260504913
+ * Sean Wolfe			-- 260584644
+ * 
+ * @requirement: Sensor must be positioned at a 45 degree angle
+ * @requirement: Robot must be on the right of the wall
+ * 
+ * Bang Bang Controller
+ * 
+ * BangBang constants: 	add +- 100
+ * 						multiply +- 1
+ */
 public class BangBangController implements UltrasonicController{
 	//Given Constants and Variables
 	private final int bandCenter, bandwith;
@@ -106,8 +118,8 @@ public class BangBangController implements UltrasonicController{
 	 * 
 	 * @param error : the absolute value of (BandCenter - this.distance)
 	 * 
-	 * The speed of the left motor is LEFT_SPEED
-	 * The speed of the right motor is RIGHT_SPEED
+	 * The speed of the left motor is LEFT_SPEED (100)
+	 * The speed of the right motor is RIGHT_SPEED (300)
 	 */
 	private void turnLeft(int abs) {
 		// TODO Auto-generated method stub

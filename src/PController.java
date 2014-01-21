@@ -1,5 +1,24 @@
 import lejos.nxt.*;
 
+/*
+ * Group 21 - ECSE 211
+ * Satyajit Kanetkar 	-- 260504913
+ * Sean Wolfe			-- 260584644
+ * 
+ * @requirement: Sensor must be positioned at a 45 degree angle
+ * @requirement: Robot must be on the right of the wall
+ * 
+ * PType Controller
+ * 
+ * for turning left:
+ * The speed of the left motor is 200 - 10 * |this.distance - BANDCENTER| down to 50 rad/s
+ * The speed of the right motor is 200 + 10 * |this.distance - BANDCENTER| up to 350 rad/s
+ * 
+ * for turning right:
+ * The speed of the left motor is: 	200 + (|this.distance - BANDCENTER|)
+ * The speed of the right motor is:	-1 * [ 200 - (|this.distance - BANDCENTER|)]
+ */
+
 public class PController implements UltrasonicController {
 	//Given Constants and Variables
 	private final int bandCenter, bandwith;
