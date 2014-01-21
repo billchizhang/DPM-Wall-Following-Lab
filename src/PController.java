@@ -3,7 +3,7 @@ import lejos.nxt.*;
 public class PController implements UltrasonicController {
 	//Given Constants and Variables
 	private final int bandCenter, bandwith;
-	private final int MOTOR_STRAIGHT = 200, FILTER_OUT = 35;
+	private final int MOTOR_STRAIGHT = 200, FILTER_OUT = 20;
 	private final NXTRegulatedMotor leftMotor = Motor.B, rightMotor = Motor.C, usMotor = Motor.A;	
 	private int distance;
 	private int filterControl;
