@@ -10,7 +10,7 @@ public class PController implements UltrasonicController {
 	
 	//my constants and variables
 	/* minimum speed the robot will travel at */
-	private final int MIN_SPEED = 50;
+	private final int MIN_SPEED = 150;
 	/* max speed the robot will travel at */
 	private final int MAX_SPEED = 350;
 	/*factor the error is multiplied by to calculate the speed*/
@@ -104,12 +104,12 @@ public class PController implements UltrasonicController {
 	 * 
 	 * @param error : the absolute value of (BandCenter - this.distance)
 	 * 
-	 * The speed of the left motor is: 	200 + (|this.distance - BANDCENTER| / 10)
-	 * The speed of the right motor is:	-1 * [ 200 - (|this.distance - BANDCENTER| / 10)]
+	 * The speed of the left motor is: 	200 + (|this.distance - BANDCENTER|)
+	 * The speed of the right motor is:	-1 * [ 200 - (|this.distance - BANDCENTER|)]
 	 */
 	public void turnRight(int error){	
-		leftMotor.setSpeed(MOTOR_STRAIGHT + error / SCALING_FACTOR);
-		rightMotor.setSpeed(MOTOR_STRAIGHT - error / SCALING_FACTOR);
+		leftMotor.setSpeed(MOTOR_STRAIGHT + error);
+		rightMotor.setSpeed(MOTOR_STRAIGHT - error);
 		
 		leftMotor.forward();
 		rightMotor.backward();
