@@ -1,5 +1,24 @@
 import lejos.nxt.*;
 
+/*
+ * Group 21 - ECSE 211
+ * Satyajit Kanetkar 	-- 260504913
+ * Sean Wolfe			-- 260584644
+ * 
+ * @requirement: Sensor must be positioned at a 45 degree angle
+ * @requirement: Robot must be on the right of the wall
+ * 
+ * PType Controller
+ * 
+ * for turning left:
+ * The speed of the left motor is 200 - 10 * |this.distance - BANDCENTER| down to 50 rad/s
+ * The speed of the right motor is 200 + 10 * |this.distance - BANDCENTER| up to 350 rad/s
+ * 
+ * for turning right:
+ * The speed of the left motor is: 	200 + (|this.distance - BANDCENTER|)
+ * The speed of the right motor is:	-1 * [ 200 - (|this.distance - BANDCENTER|)]
+ */
+
 public class PController implements UltrasonicController {
 	//Given Constants and Variables
 	private final int bandCenter, bandwith;
@@ -10,7 +29,7 @@ public class PController implements UltrasonicController {
 	
 	//my constants and variables
 	/* minimum speed the robot will travel at */
-	private final int MIN_SPEED = 50;
+	private final int MIN_SPEED = 150;
 	/* max speed the robot will travel at */
 	private final int MAX_SPEED = 350;
 	/*factor the error is multiplied by to calculate the speed*/
@@ -29,19 +48,21 @@ public class PController implements UltrasonicController {
 		leftMotor.setSpeed(MOTOR_STRAIGHT);
 		rightMotor.setSpeed(MOTOR_STRAIGHT);
 		leftMotor.forward();
-		rightMotor.forward();
-		usMotor.forward();
+		rightMotor.forward(); 
+		//usMotor.forward();
 		/*starts rotating the sensor*/
-		rotateSensor();
+		//rotateSensor();
 		filterControl = 0;
 	}
 	
 	@Override
 	public void processUSData(int distance) {
 		//rotates the sensor back if has passed angle
+		/*
 		if(Math.abs(this.usMotor.getTachoCount()) >= ANGLE){
 			rotateSensor();
 		}
+		*/
 		this.distance = distance;
 		//difference between ideal distance and real distance
 		this.error = (bandCenter - this.distance);
@@ -102,12 +123,12 @@ public class PController implements UltrasonicController {
 	 * 
 	 * @param error : the absolute value of (BandCenter - this.distance)
 	 * 
-	 * The speed of the left motor is: 	200 + (|this.distance - BANDCENTER| / 10)
-	 * The speed of the right motor is:	-1 * [ 200 - (|this.distance - BANDCENTER| / 10)]
+	 * The speed of the left motor is: 	200 + (|this.distance - BANDCENTER|)
+	 * The speed of the right motor is:	-1 * [ 200 - (|this.distance - BANDCENTER|)]
 	 */
 	public void turnRight(int error){	
-		leftMotor.setSpeed(MOTOR_STRAIGHT + error / SCALING_FACTOR);
-		rightMotor.setSpeed(MOTOR_STRAIGHT - error / SCALING_FACTOR);
+		leftMotor.setSpeed(MOTOR_STRAIGHT + error);
+		rightMotor.setSpeed(MOTOR_STRAIGHT - error);
 		
 		leftMotor.forward();
 		rightMotor.backward();
