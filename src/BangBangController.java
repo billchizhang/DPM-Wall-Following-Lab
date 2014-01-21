@@ -44,10 +44,10 @@ public class BangBangController implements UltrasonicController{
 	
 	@Override
 	public void processUSData(int distance) {
-		
+		/*
 		if(Math.abs(this.usMotor.getTachoCount()) >= ANGLE){
-			//rotateSensor();
-		}
+			rotateSensor();
+		}*/
 		
 		this.distance = distance;
 		// TODO: process a movement based on the us distance passed in (BANG-BANG style)

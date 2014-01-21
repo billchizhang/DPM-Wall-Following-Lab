@@ -5,8 +5,8 @@ public class Lab1 {
 	
 	private static final SensorPort usPort = SensorPort.S1;
 	//private static final SensorPort lightPort = SensorPort.S2;
-	
-	private static final int bandCenter = 20, bandWidth = 3;
+	//bandcenter = 20 / sin (45) ~= 28
+	private static final int bandCenter = 28, bandWidth = 3;
 	private static final int motorLow = 100, motorHigh = 400;
 	
 	
